@@ -4,7 +4,6 @@ import btree.BTree;
 public class MainBTreeEstudiantes {
     public static void main(String[] args) {
         BTree<RegistroEstudiante> arbol = new BTree<>(4);
-
         // insertar estudiantes
         arbol.insert(new RegistroEstudiante(103, "Ana"));
         arbol.insert(new RegistroEstudiante(110, "Luis"));

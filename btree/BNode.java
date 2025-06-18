@@ -10,19 +10,18 @@ public class BNode<E extends Comparable<E>> {
     protected ArrayList<BNode<E>> childs;       // Hijos del nodo
     protected int count;                        // Número actual de claves
 
-    public BNode(int n) {
-        this.idNode = ++idCounter; // Asigna un ID único al nodo
-        this.keys = new ArrayList<>(n);
-        this.childs = new ArrayList<>(n + 1);
-        this.count = 0;
+ public BNode(int n) {
+    this.idNode = ++idCounter;
+    this.keys = new ArrayList<>(n);
+    this.childs = new ArrayList<>(n + 1);
+    this.count = 0;
 
-        // Inicializa claves y punteros a hijos con null
-        for (int i = 0; i < n; i++) {
-            this.keys.add(null);
-            this.childs.add(null);
-        }
-        this.childs.add(null); // Hijo extra en la posición n
+    for (int i = 0; i < n; i++) {
+        this.keys.add(null);
+        this.childs.add(null);
     }
+    this.childs.add(null);
+}
 
     // Verifica si el nodo está lleno (usa el máximo de claves permitido)
     public boolean nodeFull(int maxKeys) {
@@ -35,14 +34,13 @@ public class BNode<E extends Comparable<E>> {
     }
 
     // Busca si una clave existe en este nodo
-    public boolean searchNode(E key) {
-        for (int i = 0; i < count; i++) {
-            if (key.equals(keys.get(i))) {
-                return true;
-            }
-        }
-        return false;
+   public boolean searchNode(E key, int[] pos) {
+    pos[0] = 0;
+    while (pos[0] < count && key.compareTo(keys.get(pos[0])) > 0) {
+        pos[0]++;
     }
+    return (pos[0] < count && key.equals(keys.get(pos[0])));
+}
 
     @Override
     public String toString() {
